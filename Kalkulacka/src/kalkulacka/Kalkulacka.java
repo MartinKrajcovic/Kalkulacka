@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Kalkulacka extends Application {
 
-    @Override
+    @Override	//anotacia
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         Scene scene = new Scene(root);
