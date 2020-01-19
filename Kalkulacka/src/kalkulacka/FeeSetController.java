@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class FeeSetController implements Initializable {
 
-    @FXML private TextField feeField;
-    @FXML private Button submitButton;
+    @FXML private TextField feeField;	//textove pole, kam sa vklada poplatok
+    @FXML private Button submitButton;	//tlacidlo, ktorym sa nastavuje poplatok
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
