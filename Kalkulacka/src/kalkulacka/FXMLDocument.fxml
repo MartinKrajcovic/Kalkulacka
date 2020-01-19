@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kalkulacka.FXMLDocumentController">
+   <children>
+      <Separator layoutX="263.0" layoutY="112.0" orientation="VERTICAL" prefHeight="113.0" prefWidth="1.0" />
+      <MenuBar layoutY="-2.0" prefHeight="14.0" prefWidth="531.0">
+        <menus>
+          <Menu mnemonicParsing="false" onAction="#openJew" text="Options">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Set wallet fee" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label fx:id="walletFeeLabel" layoutX="148.0" layoutY="275.0" prefHeight="17.0" prefWidth="202.0" text="0.5%" textFill="#c32719" />
+      <Label layoutX="14.0" layoutY="116.0" prefHeight="17.0" prefWidth="146.0" text="New deposit amount in € :" />
+      <TextField fx:id="newDepo" layoutX="161.0" layoutY="112.0" prefHeight="25.0" prefWidth="98.0" />
+      <TextField fx:id="purchase" layoutX="161.0" layoutY="140.0" prefHeight="25.0" prefWidth="98.0" />
+      <Label layoutX="14.0" layoutY="144.0" prefHeight="17.0" prefWidth="146.0" text="Purchase amount in € :" />
+      <TextField fx:id="actualValueBTC" layoutX="161.0" layoutY="168.0" prefHeight="25.0" prefWidth="98.0" />
+      <Label layoutX="14.0" layoutY="172.0" prefHeight="17.0" prefWidth="146.0" text="Actual value of BTC in € :" />
+      <Button fx:id="addToWallet" layoutX="161.0" layoutY="197.0" mnemonicParsing="false" onAction="#addToWallet" prefHeight="25.0" prefWidth="48.0" text="Add" />
+      <Button fx:id="buyFromWallet" layoutX="211.0" layoutY="197.0" mnemonicParsing="false" onAction="#buyFromWallet" prefHeight="25.0" prefWidth="48.0" text="Buy" />
+      <TextField fx:id="withdraw" layoutX="419.0" layoutY="112.0" prefHeight="25.0" prefWidth="98.0" />
+      <Label layoutX="270.0" layoutY="116.0" prefHeight="17.0" prefWidth="146.0" text="Withdraw amount in BTC :" />
+      <Label fx:id="withdrawAllTextButton" accessibleRole="HYPERLINK" alignment="CENTER" layoutX="419.0" layoutY="137.0" onMouseClicked="#withdrawAll" prefHeight="17.0" prefWidth="98.0" text="Withdraw all" textFill="#e35e09">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="11.5" />
+         </font>
+      </Label>
+      <TextField fx:id="actualValueBTC2" layoutX="419.0" layoutY="168.0" prefHeight="25.0" prefWidth="98.0" />
+      <Label layoutX="270.0" layoutY="172.0" prefHeight="17.0" prefWidth="146.0" text="Actual value of BTC in € :" />
+      <Button fx:id="sellBTC" layoutX="469.0" layoutY="197.0" mnemonicParsing="false" onAction="#sellBitcoin" prefHeight="25.0" prefWidth="48.0" text="Sell" />
+      <Label layoutX="100.0" layoutY="291.0" prefHeight="17.0" prefWidth="48.0" text="Euro :" />
+      <Label layoutX="100.0" layoutY="308.0" prefHeight="17.0" prefWidth="48.0" text="Bitcoin :" />
+      <Label fx:id="walletEuroLabel" layoutX="148.0" layoutY="292.0" prefHeight="17.0" prefWidth="202.0" text="500€" textFill="#033ab9" />
+      <Label fx:id="walletBTCLabel" layoutX="148.0" layoutY="309.0" prefHeight="17.0" prefWidth="202.0" text="0,020236BTC" textFill="#033ab9" />
+      <Label layoutX="100.0" layoutY="249.0" prefHeight="17.0" prefWidth="146.0" text="Wallet">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="274.0" prefHeight="17.0" prefWidth="48.0" text="Fee :" />
+      <ImageView fitHeight="101.0" fitWidth="106.0" layoutX="-5.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/walletLogo.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="253.0" layoutY="40.0" prefHeight="17.0" prefWidth="202.0" text="Calculator" textFill="#ee9529">
+         <font>
+            <Font name="Cambria Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="61.0" fitWidth="182.0" layoutX="93.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/op.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="429.0" layoutY="296.0" mnemonicParsing="false" onAction="#saveWallet" prefHeight="25.0" prefWidth="88.0" text="Save wallet" />
+      <Separator layoutX="13.0" layoutY="232.0" prefHeight="3.0" prefWidth="505.0" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>
