@@ -25,31 +25,39 @@ import penazenka.Wallet;
  * @author mkrajcovic
  */
 public class FXMLDocumentController implements Initializable {
-    @FXML private Label walletFeeLabel;			//
-    @FXML private TextField newDepo;			//
-    @FXML private TextField purchase;			//
-    @FXML private TextField actualValueBTC;		//
-    @FXML private Button addToWallet;			//
-    @FXML private Button buyFromWallet;			//
-    @FXML private TextField withdraw;			//
-    @FXML private TextField actualValueBTC2;	//
-    @FXML private Button sellBTC;				//
-    @FXML private Label walletEuroLabel;		//
-    @FXML private Label walletBTCLabel;			//
-    @FXML private Label withdrawAllTextButton;	//
-    static double staticWalletFee;	//
-    static boolean changed = false;	//
-    Wallet wallet;					//
+    @FXML private Label walletFeeLabel;			//popis stavu penazenky dole vlavo
+    @FXML private TextField newDepo;			//pole pre zadanie noveho vkladu
+    @FXML private TextField purchase;			//pole pre zadanie ciastky nakupu
+    @FXML private TextField actualValueBTC;		//pole pre zadanie aktualnej ceny btc
+    @FXML private Button addToWallet;			//tlacidlo "Add" pre pridanie vkladu
+    @FXML private Button buyFromWallet;			//tlacidlo "Buy" pre nakup btc
+    @FXML private TextField withdraw;			//pole pre zadanie poctu btc na predaj
+    @FXML private TextField actualValueBTC2;	//pole pre zadanie aktualnej ceny btc
+    @FXML private Button sellBTC;				//tlacidlo "Sell" pre predaj btc
+    @FXML private Label walletEuroLabel;		//popis stavu penazenky pre eura
+    @FXML private Label walletBTCLabel;			//popis stavu penazenky pre btc
+    @FXML private Label withdrawAllTextButton;	//popis "Withdraw all", pre nacitanie vsetkych btc
+    static double staticWalletFee;	//staticka premenna pre presun hodnoty poplatku medzi triedami
+    static boolean changed = false;	//staticky priznak pre overenie presunu hodnoty poplatku medzi triedami
+    Wallet wallet;	//deklaracia objektu triedy Wallet, s ktorym sa pracuje pocas celeho chodu programu
     
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    	/*
+    	 * Nizsie je uvedena deserializacia objektu typu Wallet zo suboru "obj.dat".
+    	 * Pokial bol stav kalkulacky aspon raz ulozeny, tak objekt nadobudne spat
+    	 * vsetky svoje hodnoty a pokracuje sa tam, kde sme skoncili.
+    	 * Pokial vsak tento subor neexistuje, resp. ked nebol stav programu este
+    	 * nikdy ulozeny, tak sa vytvori novy objekt typu Wallet.
+    	 */
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj.dat"))) {
             wallet = (Wallet) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("unable to load saved object..");
             wallet = new Wallet();
         }
+        //Uvodne nastavenie popisov penazenky pre hodnoty poplatku, eur a btc
         walletFeeLabel.setText(wallet.getWalletFee() + "%");
         walletEuroLabel.setText(wallet.getWalletEur() + "€");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");  
