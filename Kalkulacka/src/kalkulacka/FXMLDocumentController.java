@@ -63,7 +63,6 @@ public class FXMLDocumentController implements Initializable {
     /**
      * Tato metoda otvara novu fxml scenu (nove okno), ktorym je okno
      * pre nastavenie poplatku penazenky.
-     * 
      */
     public void openScene2(){
         try{
@@ -71,11 +70,13 @@ public class FXMLDocumentController implements Initializable {
             Parent rootl = (Parent)fl.load();
             Stage stage2 = new Stage();
             stage2.setScene(new Scene(rootl));
-            stage2.setResizable(false);
-            stage2.setTitle("Wallet Fee");
-            stage2.setAlwaysOnTop(true);
-            stage2.showAndWait();
+            stage2.setResizable(false);		//pouzivatel nevie zvacsovat/zmensovat okno
+            stage2.setTitle("Wallet Fee");	//nastavenie titulku okna
+            stage2.setAlwaysOnTop(true);	//nastavenie okna, aby bolo vzdy v popredi
+            stage2.showAndWait();			//hlavne vlakno (chod programu - prve okno) caka s vykonavanim
+            								//prikazov az kym sa toto okno pre zadanie poplatku nezavrie
             
+            //nastavenie poplatku penazenky a zobrazenie nastaveneho poplatku penazenky v hlavnom okne
             wallet.setWalletFee(staticWalletFee, changed);
             walletFeeLabel.setText(wallet.getWalletFee() + "%");
         } catch (IOException e) {
@@ -84,27 +85,28 @@ public class FXMLDocumentController implements Initializable {
     }  
     
     /**
-     * 
-     * @param event
+     * Tato metoda spusta okno pre zadanie poplatku penazenky stlacenim 
+     * tlacidla "set wallet fee" na liste s moznostami.
      */
     @FXML
     private void openJew(ActionEvent event) {
-        openScene2();
+        openScene2();	//volanie metody definovanej vyssie
     }
     
     /**
-     * 
-     * @param event
+     * Tato metoda sa spusta stlacenim tlacidla "Add" a sluzi na zaevidovanie
+     * noveho (pociatocneho) vkladu do penazenky. Hodnota, ktoru pouzivatel 
+     * vlozi v grafickom rozhrani do prveho textoveho pola, sa programom
+     * stiahne a dana informacia sa parsovacou technikou prevedie na cislo,
+     * pokial je zadane v spravnom tvare. Ak vsetko prejde uspesne, tato
+     * ciastka sa pripise do stavu penazenky.
      */
     @FXML
     private void addToWallet(ActionEvent event) {
-        /*
-        implementacia parsovacieho algoritmu triedy Wallet
-        */
         double walletEuroDeposit = Wallet.parseAndControl(newDepo.getText().trim());
-        wallet.setWalletEur(wallet.getWalletEur() + walletEuroDeposit);
-        walletEuroLabel.setText(wallet.getWalletEur() + "€");
-        newDepo.setText("");
+        wallet.setWalletEur(wallet.getWalletEur() + walletEuroDeposit);	//aktualizacia prostriedkov v penazenke
+        walletEuroLabel.setText(wallet.getWalletEur() + "€");	//nastavenie popisu penazenky pre eura
+        newDepo.setText("");	//vyprazdnenie textoveho pola v GUI
     }
     
     /**
