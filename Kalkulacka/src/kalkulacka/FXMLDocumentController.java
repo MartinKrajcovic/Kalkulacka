@@ -170,11 +170,20 @@ public class FXMLDocumentController implements Initializable {
         purchase.setStyle("-fx-text-inner-color: black;");      
     }
 
+    /**
+     * Tato metoda sa spusta stlacenim textu "Withdraw all" pod textovym
+     * polom pre zadanie poctu btc v sekcii predaja (prava cast GUI).
+     * Metoda doplna toto textove pole celym obsahom btc v penazenke,
+     * aby nebolo nutne prepisovat ciastku s velkym poctom desatinnych miest.
+     */
     @FXML
     private void withdrawAll(MouseEvent event) {
         withdraw.setText(wallet.getWalletBTC() + "");
     }
     
+    /**
+     * 
+     */
     @FXML
     private void sellBitcoin(ActionEvent event) {
         if (wallet.getWalletFee() <= 0) {//ked nie je nastaveny poplatok penazenky
@@ -223,6 +232,11 @@ public class FXMLDocumentController implements Initializable {
         withdraw.setStyle("-fx-text-inner-color: black;");
     }
 
+    /**
+     * Tato metoda Serializuje objekty typu Wallet, ktory program pouziva.
+     * T.j. vsetky jeho hodnoty budu zachovane, ulozenim do suboru, z
+     * ktoreho je ho mozne opat pri spusteni programu nacitat.
+     */
     @FXML
     private void saveWallet(ActionEvent event) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.dat"))) {
