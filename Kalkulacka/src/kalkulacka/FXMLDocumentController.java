@@ -20,28 +20,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import penazenka.Wallet;
 
-/**
- *
- * @author mkrajcovic
- */
 public class FXMLDocumentController implements Initializable {
-    @FXML private Label walletFeeLabel;			//popis stavu penazenky dole vlavo
+	
     @FXML private TextField newDepo;			//pole pre zadanie noveho vkladu
     @FXML private TextField purchase;			//pole pre zadanie ciastky nakupu
     @FXML private TextField actualValueBTC;		//pole pre zadanie aktualnej ceny btc
     @FXML private Button addToWallet;			//tlacidlo "Add" pre pridanie vkladu
     @FXML private Button buyFromWallet;			//tlacidlo "Buy" pre nakup btc
     @FXML private TextField withdraw;			//pole pre zadanie poctu btc na predaj
+    @FXML private Label withdrawAllTextButton;	//popis "Withdraw all", pre nacitanie vsetkych btc
     @FXML private TextField actualValueBTC2;	//pole pre zadanie aktualnej ceny btc
     @FXML private Button sellBTC;				//tlacidlo "Sell" pre predaj btc
+    @FXML private Label walletFeeLabel;			//popis stavu penazenky dole vlavo
     @FXML private Label walletEuroLabel;		//popis stavu penazenky pre eura
     @FXML private Label walletBTCLabel;			//popis stavu penazenky pre btc
-    @FXML private Label withdrawAllTextButton;	//popis "Withdraw all", pre nacitanie vsetkych btc
+    
     static double staticWalletFee;	//staticka premenna pre presun hodnoty poplatku medzi triedami
     static boolean changed = false;	//staticky priznak pre overenie presunu hodnoty poplatku medzi triedami
-    Wallet wallet;	//deklaracia objektu triedy Wallet, s ktorym sa pracuje pocas celeho chodu programu
+    Wallet wallet;					//deklaracia objektu Wallet, s ktorym sa pracuje pocas celeho chodu programu
     
-       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	/*
@@ -61,8 +58,11 @@ public class FXMLDocumentController implements Initializable {
         walletFeeLabel.setText(wallet.getWalletFee() + "%");
         walletEuroLabel.setText(wallet.getWalletEur() + "€");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");  
-    }    
+    }  
+    
     /**
+     * Tato metoda otvara novu fxml scenu (nove okno), ktorym je okno
+     * pre nastavenie poplatku penazenky.
      * 
      */
     public void openScene2(){
@@ -83,11 +83,19 @@ public class FXMLDocumentController implements Initializable {
         }
     }  
     
+    /**
+     * 
+     * @param event
+     */
     @FXML
     private void openJew(ActionEvent event) {
         openScene2();
     }
     
+    /**
+     * 
+     * @param event
+     */
     @FXML
     private void addToWallet(ActionEvent event) {
         /*
