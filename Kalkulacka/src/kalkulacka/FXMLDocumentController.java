@@ -182,7 +182,12 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-     * 
+     * Tato metoda sa spusta stlacenim tlacidla "Sell" v pravej casti uzivatelskeho
+     * okna. Metoda najskor overuje, ci je nastaveny poplatok penazenky, neskor
+     * stiahne udaje z textovych poli, parsovacou technikou ich prevedie na cisla a
+     * preveri, ci ciastka btc na predaj neprevysuje hodnotu, ktoru penazenka vlastni.
+     * Metoda nasledne vykona premenu jednotiek z btc na eura podla poplatku, ktory
+     * ma penazenka nastaveny a aktualizuje stav penazenky. 
      */
     @FXML
     private void sellBitcoin(ActionEvent event) {
@@ -190,43 +195,38 @@ public class FXMLDocumentController implements Initializable {
             openScene2();
             return;         //vyjde sa z funkcie
         }
-        String text = withdraw.getText().trim();
-        String text2= actualValueBTC2.getText().trim();
         
-        if (!(text.isEmpty() || text2.isEmpty())) {
-            
-            if (text.matches("\\d+\\.\\d+") || text.matches("\\d+\\,\\d+") || text.matches("\\d+")
-                   && text2.matches("\\d+\\.\\d+") || text2.matches("\\d+\\,\\d+") || text2.matches("\\d+")) {
-                
-                if (text.contains(",")) {
-                    text = text.replace(',', '.');
-                }
-                else if (text2.contains(",")){
-                    text2 = text2.replace(',', '.');
-                }
-                
-                double predaj = Double.parseDouble(text);
-                double btcKurz = Double.parseDouble(text2);
-                double eur;
-                
-                if (wallet.getWalletBTC() < predaj) {
-                    withdraw.setStyle("-fx-text-inner-color: red;");
-                    return;
-                }
-                
-                wallet.setWalletBTC(wallet.getWalletBTC() - predaj);
-                
-                eur = predaj * btcKurz; //premena predavanych btc na eura
-                double poplatok = predaj * (wallet.getWalletFee() / 100);
-                double walletEur = eur - poplatok;
-            
-                wallet.setWalletEur(wallet.getWalletEur() + walletEur);
-                walletEuroLabel.setText(wallet.getWalletEur() + "€");
-            
-                walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");
-                
-            }
+        /*
+         * doplnit overenie podmienky - ak co i len jedno textove
+         * pole je prazdne tak stlacenie tlacidla sposoby vystup
+         * z funkcie.
+         */
+        double predaj = Wallet.parseAndControl(withdraw.getText().trim());
+        double btcKurz = Wallet.parseAndControl(actualValueBTC2.getText().trim());
+        double eur, poplatok, walletEur;
+ 
+        if (wallet.getWalletBTC() < predaj) {
+        	withdraw.setStyle("-fx-text-inner-color: red;");
+        	return;
         }
+                
+        wallet.setWalletBTC(wallet.getWalletBTC() - predaj);
+        
+        //premena predavanych btc na eura
+        eur = predaj * btcKurz; 
+        poplatok = predaj * (wallet.getWalletFee() / 100);
+        walletEur = eur - poplatok;
+            
+        //aktualizacia hodnoty penazenky pre eura a nastavenie popisov
+        wallet.setWalletEur(wallet.getWalletEur() + walletEur);
+        walletEuroLabel.setText(wallet.getWalletEur() + "€");
+        walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");
+        
+        /*
+         * definovat funkcie na vyprazdnovanie textovych poli
+         * kedze sa kod na viacerych miestach opakuje.
+         */
+        //vyprazdnenie textovych poli
         withdraw.setText("");
         actualValueBTC2.setText("");
         withdraw.setStyle("-fx-text-inner-color: black;");
