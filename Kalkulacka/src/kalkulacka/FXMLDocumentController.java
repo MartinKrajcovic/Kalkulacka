@@ -25,12 +25,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TextField newDepo;			//pole pre zadanie noveho vkladu
     @FXML private TextField purchase;			//pole pre zadanie ciastky nakupu
     @FXML private TextField actualValueBTC;		//pole pre zadanie aktualnej ceny btc
-    @FXML private Button addToWallet;			//tlacidlo "Add" pre pridanie vkladu
-    @FXML private Button buyFromWallet;			//tlacidlo "Buy" pre nakup btc
+    @FXML private Button addButton;				//tlacidlo "Add" pre pridanie vkladu
+    @FXML private Button buyButton;				//tlacidlo "Buy" pre nakup btc
     @FXML private TextField withdraw;			//pole pre zadanie poctu btc na predaj
     @FXML private Label withdrawAllTextButton;	//popis "Withdraw all", pre nacitanie vsetkych btc
     @FXML private TextField actualValueBTC2;	//pole pre zadanie aktualnej ceny btc
-    @FXML private Button sellBTC;				//tlacidlo "Sell" pre predaj btc
+    @FXML private Button sellButton;			//tlacidlo "Sell" pre predaj btc
     @FXML private Label walletFeeLabel;			//popis stavu penazenky dole vlavo
     @FXML private Label walletEuroLabel;		//popis stavu penazenky pre eura
     @FXML private Label walletBTCLabel;			//popis stavu penazenky pre btc
@@ -110,36 +110,10 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-     * Tato funkcia sa spusti pri stlaceni tlacidla "Buy".
      * 
-     *[1] Overuje sa podmienka -> ak nemam nastaveny poplatok penazenky a chcem robit
-     *    nejake operacie, otvori sa mi okno pre nastavenie poplatku penazenky a program
-     *    ihned vyjde z tejto funkcie. 
-     *[2] Do novej premennej si ulozim sumu v eurach, ktora sa stiahne z GUI pola v podobe,
-     *    orezaneho textu, ktory je parsovacim algoritmom triedy Wallet prekonvertovany na cislo.
-     *[3] Overuje sa podmienka -> ak nemam tolko prostriedkov v penazenke, tak text pola v GUI
-     *    zmeni farbu na cervenu, cim si ziada napravu a nasledne vyjdem z funkcie tohto tlacidla.
-     *[4] Do novej premennej si ulozim aktualny kurz bitcoinu v eurach, ktory sa stiahne z GUI
-     *    pola v podobe orezaneho textu, ktory je parsovacim algoritmom triedy Wallet
-     *    prekonvertovany na cislo.
-     *[5] Aktualizujem stav penazenky pre hodnotu prostriedkov v eurach tym, ze od aktualnej ciastky,
-     *    ktora sa nachadza v penazenke odratam ciastku urcenu na nakup bitcoinu.
-     *[6] Do novej premennej si ulozim vypocet poplatku v eurach a to nasledovne: nakupnu sumu, ktorou
-     *    sa chystam kupit bitcoin vynasobim poplatkom penazenky. (poplatok penazenky sa deli 100-mi, 
-     *    vzhladom na to ako je do GUI tento poplatok zadavany)
-     *[7] Do premennej, kde mam ulozenu nakupnu sumu v eurach si ulozim tuto sumu ponizenu o vyratany
-     *    poplatok.
-     *[8] Do premennej kde mam ulozeny kurz bitcoinu v eurach ulozim nakup vydeleny kurzom a tym
-     *    vykonam premenu ciastky z eur na ciastku v bitcoinoch.
-     *[9] Aktualizujem stav penazenky pre hodnotu prostriedkov v bitcoinoch tym, ze k aktualnemu
-     *    poctu bitcoinov priratam pocet bitcoinov, ktore vysli z predchadzajucej premeny.
-     *[10]Nasledne aktualizujem indikator na aktualny stav prostriedkov penazenky v eurach, v GUI.
-     *[11]Aktualizujem indikator na aktualny stav prostriedkov penazenky v bitcoinoch, v GUI
-     *[12]Nakoniec vyprazdnim textove polia v GUI a aktualizujem farbu textoveho pola pre ciastku
-     *    nakupu spat na ciernu.
      */
     @FXML
-    private void buyFromWallet(ActionEvent event) {
+    private void buyBitcoin(ActionEvent event) {
         if (wallet.getWalletFee() <= 0) {
             openScene2(); 
             return;
