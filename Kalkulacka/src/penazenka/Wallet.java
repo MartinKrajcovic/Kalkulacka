@@ -29,6 +29,10 @@ public class Wallet implements Serializable {
             this.walletFee = walletFee;
         else
             this.walletFee = 0;
+        /*
+         * Dosadit podmienku, aby sa nam nemenila zadana hodnota
+         * poplatku, ked dojde k neplatnemu vstupu.
+         */
     }
     /**
      * Tato metoda vracia aktualnu hodnotu poplatku, ktoru ma penazenka
@@ -95,5 +99,4 @@ public class Wallet implements Serializable {
             return 0;
         }
     }
-    
 }
