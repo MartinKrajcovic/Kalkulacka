@@ -110,7 +110,16 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-     * 
+     * Tato metoda sa spusta stlacenim tlacidla "Buy" a sluzi na simulaciu nakupu
+     * bitcoinu za specifikovanu ciastku eur. Najskor metoda overuje rozne
+     * podmienky ako je napr. nastavenie poplatku penazenky, alebo ci su vyplnene
+     * vsetky potrebne polia, ci ciastku, za ktoru chce pouzivatel nakupit ma
+     * vobec v penazenke k dispozicii. Ciastky stiahnute z textovych poli sa 
+     * prekonvertuju parsovacou technikou na spravny tvar cisel a potom nastava
+     * premena jednotiek: Najskor sa aktualizuje hodnota eur v penazenke od ktorej
+     * je odratana ciastka zadana do textoveho pola pre nakup. V dalsom kroku
+     * sa nakupna cena ponizi o poplatok specifikovany penazenkou. V poslednom kroku
+     * sa premeni tato euro hodnota na bitcoin podla aktualneho (zadaneho) kurzu.
      */
     @FXML
     private void buyBitcoin(ActionEvent event) {
@@ -127,18 +136,19 @@ public class FXMLDocumentController implements Initializable {
             return;
         }
         double btc = Wallet.parseAndControl(actualValueBTC.getText().trim());
-        
         wallet.setWalletEur(wallet.getWalletEur() - nakup);  
         
+        //premena nakupnej ciastky eur na btc
         double poplatok = nakup * (wallet.getWalletFee() / 100);
         nakup = nakup - poplatok;
         btc = nakup / btc;
         
+        //aktualizacia hodnoty penazenky pre btc a nastavenie popisov
         wallet.setWalletBTC(wallet.getWalletBTC() + btc);
-        
         walletEuroLabel.setText(wallet.getWalletEur() + "€");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC"); 
         
+        //vyprazdnenie textovych poli
         purchase.setText("");
         actualValueBTC.setText("");
         purchase.setStyle("-fx-text-inner-color: black;");      
