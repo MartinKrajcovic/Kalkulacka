@@ -56,7 +56,7 @@ public class FXMLDocumentController implements Initializable {
         }
         //Uvodne nastavenie popisov penazenky pre hodnoty poplatku, eur a btc
         walletFeeLabel.setText(wallet.getWalletFee() + "%");
-        walletEuroLabel.setText(wallet.getWalletEur() + "€");
+        walletEuroLabel.setText(wallet.getWalletEur() + "Ã¢â€šÂ¬");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");  
     }  
     
@@ -105,12 +105,12 @@ public class FXMLDocumentController implements Initializable {
     private void addToWallet(ActionEvent event) {
         double walletEuroDeposit = Wallet.parseAndControl(newDepo.getText().trim());
         wallet.setWalletEur(wallet.getWalletEur() + walletEuroDeposit);	//aktualizacia prostriedkov v penazenke
-        walletEuroLabel.setText(wallet.getWalletEur() + "€");	//nastavenie popisu penazenky pre eura
+        walletEuroLabel.setText(wallet.getWalletEur() + "Ã¢â€šÂ¬");	//nastavenie popisu penazenky pre eura
         newDepo.setText("");	//vyprazdnenie textoveho pola v GUI
     }
     
     /*
-     * ULOHA è.1
+     * ULOHA c.1
      * 
      * Doplnit textove tlacidlo "Buy all" do GUI a spravit na to funkciu,
      * ktora po stlaceni doplni do textoveho pola "purchase" maximum
@@ -153,7 +153,7 @@ public class FXMLDocumentController implements Initializable {
         
         //aktualizacia hodnoty penazenky pre btc a nastavenie popisov
         wallet.setWalletBTC(wallet.getWalletBTC() + btc);
-        walletEuroLabel.setText(wallet.getWalletEur() + "€");
+        walletEuroLabel.setText(wallet.getWalletEur() + "Ã¢â€šÂ¬");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC"); 
         
         //vyprazdnenie textovych poli
@@ -189,7 +189,7 @@ public class FXMLDocumentController implements Initializable {
         }
         
         /* 
-         * ULOHA è.2
+         * ULOHA c.2
          * 
          * doplnit overenie podmienky - ak co i len jedno textove
          * pole je prazdne tak stlacenie tlacidla sposoby vystup
@@ -213,11 +213,11 @@ public class FXMLDocumentController implements Initializable {
             
         //aktualizacia hodnoty penazenky pre eura a nastavenie popisov
         wallet.setWalletEur(wallet.getWalletEur() + walletEur);
-        walletEuroLabel.setText(wallet.getWalletEur() + "€");
+        walletEuroLabel.setText(wallet.getWalletEur() + "Ã¢â€šÂ¬");
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");
         
         /*
-         * ULOHA è.3
+         * ULOHA c.3
          * 
          * definovat funkcie na vyprazdnovanie textovych poli
          * kedze sa kod na viacerych miestach opakuje.

@@ -30,7 +30,7 @@ public class Wallet implements Serializable {
         else
             this.walletFee = 0;
         /*
-         * ULOHA è.4
+         * ULOHA c.4
          * 
          * Dosadit podmienku, aby sa nam nemenila zadana hodnota
          * poplatku, ked dojde k neplatnemu vstupu.
