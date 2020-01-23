@@ -109,6 +109,14 @@ public class FXMLDocumentController implements Initializable {
         newDepo.setText("");	//vyprazdnenie textoveho pola v GUI
     }
     
+    /*
+     * ULOHA è.1
+     * 
+     * Doplnit textove tlacidlo "Buy all" do GUI a spravit na to funkciu,
+     * ktora po stlaceni doplni do textoveho pola "purchase" maximum
+     * (cely obsah) penazenky v eurach.
+     */
+    
     /**
      * Tato metoda sa spusta stlacenim tlacidla "Buy" a sluzi na simulaciu nakupu
      * bitcoinu za specifikovanu ciastku eur. Najskor metoda overuje rozne
@@ -180,7 +188,9 @@ public class FXMLDocumentController implements Initializable {
             return;         //vyjde sa z funkcie
         }
         
-        /*
+        /* 
+         * ULOHA è.2
+         * 
          * doplnit overenie podmienky - ak co i len jedno textove
          * pole je prazdne tak stlacenie tlacidla sposoby vystup
          * z funkcie.
@@ -207,6 +217,8 @@ public class FXMLDocumentController implements Initializable {
         walletBTCLabel.setText(wallet.getWalletBTC() + "BTC");
         
         /*
+         * ULOHA è.3
+         * 
          * definovat funkcie na vyprazdnovanie textovych poli
          * kedze sa kod na viacerych miestach opakuje.
          */
