@@ -1,5 +1,5 @@
 package statistika;
 
-public class Zaznam {
+interface Zaznam {
 	
 }
