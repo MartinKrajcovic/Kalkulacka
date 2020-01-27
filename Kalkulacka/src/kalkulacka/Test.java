@@ -12,6 +12,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class Test {
 	public static void main(String[] args) {
+		
 		//vytiahnutie suborov, ktore su len zapisovatelne
 		try (DirectoryStream<Path> dStream = Files.newDirectoryStream(Paths.get("C://devel"), 
 		/* druhy parameter prepisuje metody accept triedy DirectoryStream.Filter<Path> pomocou lambda vyrazu */
