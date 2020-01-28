@@ -2,7 +2,7 @@ package kalkulacka;
 
 import java.util.Formatter;
 
-public class Test {
+public class T {
 	
 	/**
 	 * Tato metoda sluzi na zaokruhlenie celeho datoveho typu double na
@@ -16,5 +16,5 @@ public class Test {
 		if (str.contains(","))
 			str = str.replace(',', '.');
 		return Double.parseDouble(str);
-	}
+	}	
 }
