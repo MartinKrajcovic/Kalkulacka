@@ -1,6 +1,7 @@
 package penazenka;
 
 import java.io.Serializable;
+import java.util.Formatter;
 /**
  * Tato trieda sluzi ako struktura pre uchovavanie vlastnosti penazenky.
  * Tato trieda implementuje znackovacie rozhranie Serializable, aby jej
@@ -50,7 +51,7 @@ public class Wallet implements Serializable {
      * @param walletEur - urcuje konkretnu sumu v eurach, ktora bude ulozena.
      */
     public void setWalletEur(double walletEur) {
-        this.walletEur = walletEur;
+        this.walletEur = formatDouble(walletEur, 2);
     }
     /**
      * Tato metoda vracia aktualnu hodnotu financii v eurach, ktoru penazenka
@@ -65,7 +66,7 @@ public class Wallet implements Serializable {
      * @param walletBTC - urcuje konkretnu sumu v bitcoinoch, ktora bude ulozena.
      */
     public void setWalletBTC(double walletBTC) {
-        this.walletBTC = walletBTC;
+        this.walletBTC = formatDouble(walletBTC, 8);
     }
     /**
      * Tato metoda vracia aktualnu hodnotu financii v bitcoinoch, ktoru penazenka
@@ -100,5 +101,24 @@ public class Wallet implements Serializable {
         } catch (NumberFormatException e) {
             return 0;
         }
+    }
+    /**
+     * Tato metoda sluzi pre zaokruhlenie celeho desatinneho cisla v tvare
+     * datoveho typu double, na pocet desatinnych miest specifikovanych v
+     * parametry funkcie. Kedze kalkulacka by ratala presnejsie, na viac
+     * desatinnych miest ako rata samotna burza, tak je nutne pocet tychto 
+     * desatinnych miest zmensit, aby boli vypocti burzy ekvivalentne k
+     * vypoctom tohto programu.
+     * @param num - je ciastka v eur/btc s velkym poctom desatinnych miest
+     * @param decimalPoint - je pocet pozadovanych desatinnych miest ciastky
+     * @return - metoda vracia desatinne cislo so zaokruhlenim tak, aby splnalo
+     * pozadovanu presnost desatinnych miest.
+     */
+    private double formatDouble(double num, int decimalPoint) {
+    	Formatter fmt = new Formatter();
+		String precision = "%." + decimalPoint + "f";
+		String str = fmt.format(precision, num).toString();
+		fmt.close();
+		return Double.parseDouble(str);
     }
 }
