@@ -209,6 +209,7 @@ public class FXMLDocumentController implements Initializable {
         //premena predavanych btc na eura
         eur = predaj * btcKurz; 
         poplatok = predaj * (wallet.getWalletFee() / 100);
+        
         walletEur = eur - poplatok;
             
         //aktualizacia hodnoty penazenky pre eura a nastavenie popisov
