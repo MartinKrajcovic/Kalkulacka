@@ -119,6 +119,7 @@ public class Wallet implements Serializable {
 		String precision = "%." + decimalPoint + "f";
 		String str = fmt.format(precision, num).toString();
 		fmt.close();
+		str = str.contains(",") ? str.replace(',', '.') : str ;
 		return Double.parseDouble(str);
     }
 }
