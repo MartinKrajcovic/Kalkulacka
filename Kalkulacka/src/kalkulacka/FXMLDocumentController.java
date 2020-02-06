@@ -35,6 +35,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private Label walletEuroLabel;		//popis stavu penazenky pre eura
     @FXML private Label walletBTCLabel;			//popis stavu penazenky pre btc
     
+    
     static double staticWalletFee;	//staticka premenna pre presun hodnoty poplatku medzi triedami
     static boolean changed = false;	//staticky priznak pre overenie presunu hodnoty poplatku medzi triedami
     Wallet wallet;					//deklaracia objektu Wallet, s ktorym sa pracuje pocas celeho chodu programu
