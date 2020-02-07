@@ -22,6 +22,7 @@ public class FeeSetController implements Initializable {
     /**
      * Tato metoda sa vykona, po stlaceni tlacidla "Submit"
      * v okne, kde sa nastavuje poplatok penazenky.
+     * 
      */
     @FXML
     private void setWalletFee(ActionEvent event) {
